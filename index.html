@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythic Gadget Store | Your Tech Future</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="announcement">
+    ✦ WELCOME TO MYTHIC GADGET STORE — YOUR TECH FUTURE ✦
+</div>
+
+<header class="header">
+    <a href="#home" class="brand">
+        <img src="logo-mythic.png" alt="Logo Mythic Gadget" class="logo"
+             onerror="this.style.display='none'">
+        <span class="brand-name">
+            MYTHIC GADGET
+            <small>STORE • YOUR TECH FUTURE</small>
+        </span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+
+    <nav class="nav" id="navMenu">
+        <a href="#home">Beranda</a>
+        <a href="#products">Produk</a>
+        <a href="#about">Tentang Kami</a>
+        <button class="cart-button" id="openCart">
+            🛒 Keranjang (<span id="cartCount">0</span>)
+        </button>
+    </nav>
+</header>
+
+<main>
+    <!-- HERO / TIGA HP ANIMASI -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-mark">✦ PREMIUM GAMING TECHNOLOGY ✦</div>
+
+            <h1>
+                LEVEL UP YOUR<br>
+                <span>GAMING EXPERIENCE</span>
+            </h1>
+
+            <p>
+                Temukan smartphone gaming berkualitas tinggi dengan
+                performa luar biasa dan teknologi modern hanya di
+                Mythic Gadget Store.
+            </p>
+
+            <a href="#products" class="hero-button">
+                JELAJAHI PRODUK →
+            </a>
+        </div>
+
+        <div class="hero-phone">
+            <div class="phone-glow"></div>
+
+            <div class="phone-item phone-left">
+                <img
+                    src="https://fdn2.gsmarena.com/vv/pics/zte/zte-nubia-red-magic-9-pro-1.jpg"
+                    alt="RedMagic Gaming Phone">
+            </div>
+
+            <div class="phone-item phone-center">
+                <img
+                    src="https://press.asus.com/assets/w_640%2Ch_640/dfd04c89-22c4-4d59-931c-93ea7bf2c104/ROG%20Phone%208%20Pro-02.png"
+                    alt="ROG Phone 8 Pro">
+            </div>
+
+            <div class="phone-item phone-right">
+                <img
+                    src="https://i02.appmifile.com/80_item_hk/08/01/2024/ccee9581cb6b46b59345a791734d8f84.png"
+                    alt="POCO Gaming Phone">
+            </div>
+
+            <div class="phone-label">MYTHIC GAMING SERIES</div>
+        </div>
+    </section>
+
+    <!-- PRODUK -->
+    <section class="section" id="products">
+        <div class="section-heading">
+            <h2>OUR PREMIUM PRODUCTS</h2>
+            <p>Temukan perangkat terbaik untuk pengalaman gaming maksimal.</p>
+        </div>
+
+        <div class="toolbar">
+            <input
+                type="text"
+                class="search"
+                id="searchInput"
+                placeholder="Cari HP gaming favorit kamu...">
+        </div>
+
+        <div class="products" id="productList"></div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section class="section about" id="about">
+        <div class="section-heading">
+            <h2>ABOUT MYTHIC GADGET</h2>
+            <p>Lebih dari sekadar toko smartphone.</p>
+        </div>
+
+        <div class="about-text">
+            <p>
+                Mythic Gadget Store merupakan pusat penjualan perangkat
+                teknologi berkelas legendaris yang menghadirkan berbagai
+                smartphone gaming berkualitas tinggi.
+            </p>
+
+            <div class="meaning">
+                "PUSAT PERANGKAT TEKNOLOGI BERKELAS LEGENDARIS"
+            </div>
+
+            <p>
+                Kami berkomitmen menyediakan produk pilihan dengan kualitas
+                unggul, pelayanan terpercaya, dan pengalaman belanja yang
+                nyaman bagi setiap pelanggan.
+            </p>
+
+            <div class="benefit-list">
+                <div class="benefit">
+                    <h3>⚡ Performa Tinggi</h3>
+                    <p>Perangkat dengan performa tangguh untuk gaming.</p>
+                </div>
+
+                <div class="benefit">
+                    <h3>🛡️ Produk Berkualitas</h3>
+                    <p>Pilihan smartphone dari berbagai merek terpercaya.</p>
+                </div>
+
+                <div class="benefit">
+                    <h3>💎 Pelayanan Premium</h3>
+                    <p>Pelayanan profesional dan pengalaman belanja nyaman.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closing">
+        <h2>YOUR TECH FUTURE</h2>
+        <p>Awali masa depan teknologi bersama Mythic Gadget Store.</p>
+    </section>
+</main>
+
+<footer>
+    © 2026 Mythic Gadget Store. All Rights Reserved.
+    <br><br>
+    YOUR TECH FUTURE
+</footer>
+
+<!-- MODAL KERANJANG -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h2>🛒 Keranjang Belanja</h2>
+            <button class="close-cart" id="closeCart" aria-label="Tutup">×</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rp 0</span>
+            </div>
+
+            <button class="checkout-button" id="checkoutButton">
+                CHECKOUT VIA WHATSAPP
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+const whatsappNumber = "628977460421";
+
+const products = [
+    {
+        id: 1,
+        name: "ROG Phone 8 Pro",
+        price: 15999000,
+        tag: "GAMING FLAGSHIP",
+        image: "https://press.asus.com/assets/w_640%2Ch_640/dfd04c89-22c4-4d59-931c-93ea7bf2c104/ROG%20Phone%208%20Pro-02.png",
+        description: "Performa gaming tangguh dengan layar AMOLED dan chipset Snapdragon."
+    },
+    {
+        id: 2,
+        name: "RedMagic 9 Pro",
+        price: 12999000,
+        tag: "BEST GAMING",
+        image: "https://fdn2.gsmarena.com/vv/pics/zte/zte-nubia-red-magic-9-pro-1.jpg",
+        description: "Sistem pendingin aktif dan performa tinggi untuk gaming."
+    },
+    {
+        id: 3,
+        name: "POCO X6 Pro",
+        price: 4499000,
+        tag: "BEST VALUE",
+        image: "https://i02.appmifile.com/80_item_hk/08/01/2024/ccee9581cb6b46b59345a791734d8f84.png",
+        description: "Performa cepat dengan layar AMOLED dan pengalaman gaming responsif."
+    },
+    {
+        id: 4,
+        name: "Infinix GT 20 Pro",
+        price: 3499000,
+        tag: "GAMING SERIES",
+        image: "https://id.pro.infinixmobility.com/media/catalog/product/cache/10f519365b01716ddb90abc57de5a837/o/r/orange_1.png",
+        description: "Desain gaming futuristik dan layar dengan refresh rate tinggi."
+    },
+    {
+        id: 5,
+        name: "ROG Phone 9 Pro",
+        price: 18999000,
+        tag: "PREMIUM",
+        image: "https://dlcdnwebimgs.asus.com/gain/696EF1BE-13DE-4A30-B27E-D856E21F203B/w717/h525",
+        description: "Smartphone gaming premium dengan performa generasi terbaru."
+    },
+    {
+        id: 6,
+        name: "RedMagic 10 Pro",
+        price: 14999000,
+        tag: "POWERFUL",
+        image: "https://cdn.hstatic.net/products/1000300544/download_-_2025-07-21t125032.674_3eb9962c22214b5cb61f41e2c72ddcdd.png",
+        description: "Chipset kelas atas dan teknologi pendingin untuk bermain lebih lama."
+    },
+    {
+        id: 7,
+        name: "POCO F7 Ultra",
+        price: 9999000,
+        tag: "FLAGSHIP KILLER",
+        image: "https://cdn.webshopapp.com/shops/256009/files/475244433/xiaomi-xiaomi-poco-f7-ultra-16gb-512gb.jpg",
+        description: "Performa flagship dengan layar berkualitas tinggi."
+    },
+    {
+        id: 8,
+        name: "iQOO 13",
+        price: 10999000,
+        tag: "HIGH PERFORMANCE",
+        image: "https://cdnpro.eraspace.com/media/catalog/product/i/q/iqoo_13_legend_white_01_1.jpg",
+        description: "Performa cepat dan pengalaman visual yang memukau."
+    },
+    {
+        id: 9,
+        name: "Samsung Galaxy S25 Ultra",
+        price: 19999000,
+        tag: "ULTRA PREMIUM",
+        image: "https://www.mobileciti.com.au/media/catalog/product/s/a/samsung-galaxy-s25-ultra-256gb-titanium-black-5.jpg",
+        description: "Smartphone premium dengan kamera dan performa unggulan."
+    },
+    {
+        id: 10,
+        name: "Xiaomi 15 Ultra",
+        price: 16999000,
+        tag: "PREMIUM CAMERA",
+        image: "https://i05.appmifile.com/264_item_uk/24/02/2025/4de692cc0a0ea98c850ac446c8007e35.png",
+        description: "Teknologi kamera premium dan performa kelas atas."
+    },
+    {
+        id: 11,
+        name: "Nubia Z70 Ultra",
+        price: 11999000,
+        tag: "ELITE SERIES",
+        image: "https://i.blogs.es/c1c563/blob/original.png",
+        description: "Desain futuristik dan pengalaman penggunaan premium."
+    },
+    {
+        id: 12,
+        name: "Infinix GT 30 Pro",
+        price: 4499000,
+        tag: "GAMING CHOICE",
+        image: "https://clickbuy.com.vn/uploads/news/infinix-gt-30-pro-8584328924084735194.png",
+        description: "Smartphone gaming dengan fitur modern dan desain menarik."
+    }
+];
+
+let cart = [];
+
+const productList = document.getElementById("productList");
+const searchInput = document.getElementById("searchInput");
+const cartModal = document.getElementById("cartModal");
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+const checkoutButton = document.getElementById("checkoutButton");
+const toast = document.getElementById("toast");
+
+function rupiah(number) {
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        maximumFractionDigits: 0
+    }).format(number);
+}
+
+function renderProducts(keyword = "") {
+    const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        productList.innerHTML =
+            '<p class="empty-product">Produk tidak ditemukan.</p>';
+        return;
+    }
+
+    productList.innerHTML = filtered.map(product => `
+        <article class="product-card">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <span class="image-fallback">Gambar tidak tersedia</span>
+            </div>
+
+            <div class="product-details">
+                <span class="tag">${product.tag}</span>
+                <h3>${product.name}</h3>
+                <p class="product-description">${product.description}</p>
+                <div class="product-price">${rupiah(product.price)}</div>
+                <button class="add-button" onclick="addToCart(${product.id})">
+                    + Tambahkan ke Keranjang
+                </button>
+            </div>
+        </article>
+    `).join("");
+}
+
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2200);
+}
+
+function addToCart(id) {
+    const product = products.find(item => item.id === id);
+    if (!product) return;
+
+    const existing = cart.find(item => item.id === id);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    renderCart();
+    showToast(product.name + " ditambahkan ke keranjang!");
+}
+
+function renderCart() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity, 0
+    );
+
+    cartCount.textContent = totalItems;
+    cartTotal.textContent = rupiah(totalPrice);
+    checkoutButton.disabled = cart.length === 0;
+
+    if (cart.length === 0) {
+        cartItems.innerHTML =
+            '<div class="empty-cart">Keranjang belanja masih kosong.</div>';
+        return;
+    }
+
+    cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>${rupiah(item.price)}</p>
+            </div>
+
+            <div class="quantity-control">
+                <button class="quantity-btn"
+                        onclick="changeQuantity(${item.id}, -1)">−</button>
+                <span>${item.quantity}</span>
+                <button class="quantity-btn"
+                        onclick="changeQuantity(${item.id}, 1)">+</button>
+            </div>
+
+            <button class="remove-cart-btn"
+                    onclick="removeFromCart(${item.id})">Hapus</button>
+        </div>
+    `).join("");
+}
+
+function changeQuantity(id, amount) {
+    const item = cart.find(product => product.id === id);
+    if (!item) return;
+
+    item.quantity += amount;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(product => product.id !== id);
+    }
+
+    renderCart();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    renderCart();
+    showToast("Produk dihapus dari keranjang.");
+}
+
+function openCart() {
+    cartModal.classList.add("active");
+}
+
+function closeCart() {
+    cartModal.classList.remove("active");
+}
+
+function checkout() {
+    if (cart.length === 0) return;
+
+    let message = "Halo Mythic Gadget Store! Saya ingin memesan:\n\n";
+
+    cart.forEach(item => {
+        message += `- ${item.name}\n`;
+        message += `Jumlah: ${item.quantity}\n`;
+        message += `Harga: ${rupiah(item.price * item.quantity)}\n\n`;
+    });
+
+    const total = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity, 0
+    );
+
+    message += `Total Pesanan: ${rupiah(total)}\n\n`;
+    message += "Mohon informasi lebih lanjut. Terima kasih!";
+
+    const url = "https://wa.me/" + whatsappNumber +
+                "?text=" + encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+
+document.getElementById("openCart").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
+checkoutButton.addEventListener("click", checkout);
+
+searchInput.addEventListener("input", event => {
+    renderProducts(event.target.value);
+});
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+    document.getElementById("navMenu").classList.toggle("open");
+});
+
+document.querySelectorAll("#navMenu a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("navMenu").classList.remove("open");
+    });
+});
+
+cartModal.addEventListener("click", event => {
+    if (event.target === cartModal) closeCart();
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeCart();
+});
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
