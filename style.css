@@ -799,3 +799,143 @@ footer {
         min-height: 320px;
     }
 }
+/* =====================================
+   ABOUT US - MYTHIC GADGET STORE
+===================================== */
+
+.about-us {
+    padding: 90px 8%;
+    background: #090d0e;
+    color: #f5f1e8;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+.about-label {
+    display: inline-block;
+    color: #d4ad63;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.about-container h2 {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.about-container h2 span {
+    color: #d4ad63;
+}
+
+.about-intro {
+    max-width: 750px;
+    margin: 0 auto 40px;
+    color: #aaa99f;
+    line-height: 1.9;
+}
+
+.creator-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 45px;
+}
+
+.creator-card {
+    background: #11191a;
+    border: 1px solid rgba(212,173,99,.3);
+    border-radius: 18px;
+    padding: 30px 25px;
+    transition: .3s;
+}
+
+.creator-card:hover {
+    transform: translateY(-8px);
+    border-color: #d4ad63;
+    box-shadow: 0 10px 30px rgba(212,173,99,.12);
+}
+
+.creator-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.creator-card h3 {
+    color: #f3dda0;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.nickname {
+    color: #d4ad63;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.creator-card p:last-child {
+    color: #aaa99f;
+    line-height: 1.8;
+}
+
+.website-description {
+    background: #11191a;
+    border: 1px solid rgba(212,173,99,.3);
+    border-radius: 18px;
+    padding: 40px;
+    text-align: left;
+}
+
+.website-description h2 {
+    color: #f3dda0;
+}
+
+.website-description p {
+    color: #aaa99f;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.website-description strong {
+    color: #f3dda0;
+}
+
+.website-description h3 {
+    color: #d4ad63;
+    letter-spacing: 3px;
+    margin: 25px 0 15px;
+}
+
+.about-closing {
+    margin-top: 40px;
+    color: #aaa99f;
+    line-height: 2;
+}
+
+.about-closing strong {
+    color: #d4ad63;
+}
+
+@media (max-width: 700px) {
+    .creator-list {
+        grid-template-columns: 1fr;
+    }
+
+    .about-us {
+        padding: 60px 5%;
+    }
+
+    .about-container h2 {
+        font-size: 27px;
+    }
+
+    .website-description {
+        padding: 25px;
+    }
+}
+
